@@ -73,7 +73,7 @@ class VueGrilleV2 extends JPanel implements Observer {
 
 
         // Dessiner les rectangles de la pièce J
-
+        afficheGrille(g);
         dessinerFormePiece(g, modele.getPieceCourante().getType(), x, y);
 
 
@@ -103,12 +103,16 @@ class VueGrilleV2 extends JPanel implements Observer {
 
         }
 
-/*    public void afficheGrille(Graphics g){
+    public void afficheGrille(Graphics g){
         for (int i = 0; i < modele.TAILLE; i++) {
             for (int j = 0; j < modele.TAILLE; j++) {
                 //if (!(i == modele.getPieceCourante().getx() && j == modele.getPieceCourante().gety())) {
-                if (modele[])
-                g.setColor(Color.WHITE);
+                if (modele.getGrille()[i][j]!=0){
+                    g.setColor(Color.BLUE);
+                }
+                else{
+                    g.setColor(Color.WHITE);
+                }
                 //dessiner un rectangle rempli sur une zone graphique spécifiée.
                 //int x, int y, int width, int height
                 g.fillRect(i * TAILLE, j * TAILLE, TAILLE, TAILLE);
@@ -118,5 +122,5 @@ class VueGrilleV2 extends JPanel implements Observer {
             }
 
         }
-    }*/
+    }
 }

@@ -87,7 +87,9 @@ public class GrilleSimple extends Observable implements Runnable {
         this.pieceCourante=p;
     }
 
-
+    public int[][] getGrille(){
+        return this.grille;
+    }
     //verifier la colision dans la grille
     //verifier la collision avec la grille inferieure
 
