@@ -45,13 +45,14 @@ public class VC extends JFrame implements Observer {
                 ex.execute(new Runnable() {
                     @Override
                     public void run() {
-                        modele.getPieceCourante().rotateRight();
+                        modele.gauche();
                     }
                 });
             }
         });
 
-        jb.addKeyListener(new KeyAdapter() {
+       /* jb.addKeyListener(new KeyAdapter() {
+
             @Override
             public void keyPressed(KeyEvent e) {
                 System.out.println("Key Pressed: " + e.getKeyChar());//évènement clavier : object contrôleur qui réceptionne
@@ -71,13 +72,38 @@ public class VC extends JFrame implements Observer {
                         break;
                     /*case KeyEvent.VK_DOWN:modele.bas();
                         System.out.println("touche BAS enfoncée ");
-                    break;*/
+                    break;
                 }
 
             }
-        });
-        jb.repaint();
-        jb.setVisible(true);
+        });*/
+
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(new KeyEventDispatcher() {
+                                          @Override
+                                          public boolean dispatchKeyEvent(KeyEvent e) {
+                                              System.out.println("key event");
+                                              if (e.getID() == KeyEvent.KEY_PRESSED) {
+                                                  System.out.println(e.getKeyCode());
+                                                  switch (e.getKeyCode()) {
+                                                      case KeyEvent.VK_SPACE:
+                                                          modele.droite();
+                                                          System.out.println("touche SPACE enfoncée ");
+                                                          break;
+                                                      case KeyEvent.VK_RIGHT:
+                                                          modele.droite();
+                                                          System.out.println("touche DROITE enfoncée ");
+                                                          break;
+                                                      case KeyEvent.VK_LEFT:
+                                                          modele.gauche();
+                                                          System.out.println("touche GAUCHE enfoncée ");
+                                                          break;
+                                                  }
+
+                                              }
+                                              return false;
+                                          }
+                                      });
     }
 
 

@@ -93,6 +93,7 @@ public class Piece implements Runnable {
 
         if (!grille.verifColision(this, nX, y) && grille.validationPosition(nX, y)) {
             x = nX;
+
             System.out.println("nouvelle position piece : x = " + nX + ", y = " + y);
 
             grille.notifyObservers();
@@ -115,7 +116,7 @@ public class Piece implements Runnable {
         }
     }
 
-    public void rotateRight() {
+    public void rotation() {
         int[][] typeActuel = this.forme.type;//type actuel
         int[][] typeRotation = new int[typeActuel[0].length][typeActuel.length]; //type apres rotation
 // parcourt chaque élément du tableau typeActuel.
