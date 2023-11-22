@@ -70,16 +70,19 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     public void run() {
-
+        if(pieceCourante.blocked){
+            pieceCourante=genererPieceAleatoire();
+        }
         pieceCourante.run();
-
-        setChanged(); // setChanged() + notifyObservers() : notification de la vue pour le rafraichissement
         notifyObservers();
 
     }
 
     public Piece getPieceCourante() {
         return pieceCourante;
+    }
+    public void setPieceCourante(Piece p ){
+        this.pieceCourante=p;
     }
 
     //verifier la colision dans la grille
@@ -118,70 +121,9 @@ public class GrilleSimple extends Observable implements Runnable {
         pieceCourante.droite();
 
     }
-    /*public  void bas (){
+    public  void bas (){
         pieceCourante.bas();
 
 
-    }*/
+    }
 }
-/*
-public void supprimerLignesPleines() {
-
-    int i = 0;
-
-    while (i < this.hauteur) {
-
-        int j = 0;
-
-        while (j < this.largeur) {
-
-            if (this.grille[i][j] == 0) {
-
-                break;
-
-            }
-
-            j++;
-
-        }
-
-        if (j == this.largeur) {
-
-            this.bougerLignes(i, -1);
-
-            i++;
-
-        } else {
-
-            i++;
-
-        }
-
-    }
-
-}
- */
-/*
-    Ajoutez une méthode bougerLignes pour déplacer les lignes du haut vers le bas lorsqu'une ligne est pleine :
-
-java
-
-public void bougerLignes(int ligne, int sens) {
-
-    if (ligne < 0 || ligne >= this.hauteur) {
-
-        return;
-
-    }
-
-    for (int i = ligne; i > 0 && i < this.hauteur; i += sens) {
-
-        for (int j = 0; j < this.largeur; j++) {
-
-            this.grille[i][j] = this.grille[i - sens][j];
-
-        }
-
-    }
-
-}*/

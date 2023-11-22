@@ -6,6 +6,8 @@ import java.util.Random;
 public class Piece implements Runnable {
 
     GrilleSimple grille;
+
+    public boolean blocked=false;
     private int x = 4 + (int) (Math.random() * ((16 - 4) + 1));
     private int y = -1;
 
@@ -38,31 +40,32 @@ public class Piece implements Runnable {
     public Piece(GrilleSimple _grille, Formes forme_) {
         grille = _grille;
         this.forme = forme_;
-        rotation = 0;
+
     }
 
     public void action() {
 
     }
-
+@Override
     public void run() {
         int nextY = y;
         int nextX = x;
-
-        nextY += dY;
+        nextY -= dY;
 
         if (grille.validationPosition(nextX, nextY) && !grille.verifColision(this, nextX, nextY)) {
             y = nextY;
             x = nextX;
-            //System.out.println("pos" + x + " "+ y);
+            System.out.println("pos" + x + " " + y);
         } else {
-            dY += 1;
-            grille.placerPiece(this);
-            if (y == grille.TAILLE - 1) {
-                grille.genererPieceAleatoire();
-            }
+            //grille.placerPiece(this);
+            //Piece p =new Piece(grille,grille.genererPieceAleatoire().forme);
+            //grille.setPieceCourante(p);
+            this.blocked=true;
         }
     }
+
+
+
 
     public int getCodeCouleur() {
         return codeCouleur;
@@ -135,9 +138,9 @@ public class Piece implements Runnable {
 
         }
     }
-}
 
-   /* public  void bas (){
+
+    public  void bas (){
         int nY=y-1;
 
         if(!grille.verifColision(this,x,nY)&& grille.validationPosition(x,nY)){
@@ -151,5 +154,5 @@ public class Piece implements Runnable {
 
     }
 
-}*/
+}
 
