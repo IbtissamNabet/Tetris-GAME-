@@ -103,12 +103,12 @@ public class GrilleSimple extends Observable implements Runnable {
                 //on parcourt le tableau de la piece
                 //si ya pas d'autre piece (d'ou !=0) et si on est pas en bas de la gille
                 if (type[x][y] == 1) {
-//calcul de position dans la grille
+                //calcul de position dans la grille
                     int grilleX = x + px;
                     int grilleY = y + py;
 
                     // Vérification de la collision
-                    if (grilleY >= TAILLE || grilleX < 0 || grilleX >= TAILLE || grilleY < 0 || grille[grilleY][grilleX] != 0) {
+                    if (grilleY >= TAILLE || grilleX < 0 || grilleX >= TAILLE || grilleY < 0 || grille[grilleX][grilleY] != 0) {
                         return true;
                     }
                 }

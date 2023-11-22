@@ -56,7 +56,7 @@ public class Piece implements Runnable {
             y = nextY;
             x = nextX;
             System.out.println("pos" + x + " " + y);
-        } else {
+        } else if(grille.validationPosition(nextX, nextY) && grille.verifColision(this,nextX,nextY)){
             //Piece p =new Piece(grille,grille.genererPieceAleatoire().forme);
             //grille.setPieceCourante(p);
             this.blocked=true;
