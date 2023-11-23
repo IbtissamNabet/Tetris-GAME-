@@ -45,7 +45,7 @@ public class GrilleSimple extends Observable implements Runnable {
         for (int i = 0; i < type.length; i++) {
             for (int j = 0; j < type[i].length; j++) {
                 if (type[i][j] == 1) {
-                    placerCase(pieceX + i, pieceY + j, piece.getCodeCouleur());
+                    placerCase(pieceX + j, pieceY + i, piece.getCodeCouleur());
                 }
             }
         }
@@ -56,7 +56,7 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public void placerCase(int x, int y, int codeCouleur) {
       //  if (validationPosition(x, y)) {
-            grille[x][y] = codeCouleur;
+            grille[y][x] = codeCouleur;
     }
     //}
 
@@ -100,17 +100,17 @@ public class GrilleSimple extends Observable implements Runnable {
         //px et py  les coordonnées de la pièce par rapport à la grille.
         //on recupere le tableau qui represente le type de la piece actuelle
         int[][] type = p.getType();
-        for (int x = 0; x < type.length; x++) {
-            for (int  y= 0; y < type[x].length; y++) {
+        for (int y = 0; y < type.length; y++) {
+            for (int  x= 0; x < type[y].length; x++) {
                 //on parcourt le tableau de la piece
                 //si ya pas d'autre piece (d'ou !=0) et si on est pas en bas de la gille
-                if (type[x][y] == 1) {
+                if (type[y][x] == 1) {
                 //calcul de position dans la grille
                     int grilleX = x + px;
                     int grilleY = y + py;
 
                     // Vérification de la collision
-                    if (grilleY >= TAILLE || grilleX < 0 || grilleX >= TAILLE || grilleY < 0 || grille[grilleX][grilleY] != 0) {
+                    if (grilleY >= TAILLE || grilleX < 0 || grilleX >= TAILLE || grilleY < 0 || grille[grilleY][grilleX] != 0) {
                         return true;
                     }
                 }
@@ -133,10 +133,10 @@ public class GrilleSimple extends Observable implements Runnable {
 
     }
 
-    public boolean ligneComplete(int i){
+    public boolean ligneComplete(int y){
         boolean complete=true;
-        for (int j=0;j<grille[i].length;j++){
-            if (grille[j][i]==0){
+        for (int x=0;x<grille[y].length;x++){
+            if (grille[y][x]==0){
                 complete=false;
                 break;
             }
@@ -145,23 +145,23 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     public void supprimeLigne(int L){
-        for (int i=L;i>=0;i--){
-            for(int j=0;j<grille[i].length;j++){
-                if(i==0){
-                    grille[j][i]=0;
+        for (int y=L;y>=0;y--){
+            for(int x=0;x<grille[y].length;x++){
+                if(y==0){
+                    grille[y][x]=0;
                 }
                 else{
-                    grille[j][i]=grille[j][i-1];
+                    grille[y][x]=grille[y-1][x];
                 }
             }
         }
     }
 
     public void verifGrille(){
-        for (int i=0;i<grille.length;i++){
-            if(ligneComplete(i)){
-                System.out.println("ligne "+i+" complete");
-                supprimeLigne(i);
+        for (int y=0;y<grille.length;y++){
+            if(ligneComplete(y)){
+                System.out.println("ligne "+y+" complete");
+                supprimeLigne(y);
             }
         }
     }

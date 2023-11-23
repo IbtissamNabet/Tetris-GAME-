@@ -20,7 +20,7 @@ public class Piece implements Runnable {
     private Formes formes;
 
     public enum Formes {
-        I(new int[][]{{1, 1, 1, 1}}),
+        I(new int[][]{{1}, {1}, {1}, {1}}),
         L(new int[][]{{0, 0, 1}, {1, 1, 1}}),
         J(new int[][]{{1, 0, 0}, {1, 1, 1}}),
         O(new int[][]{{1, 1}, {1, 1}}),
