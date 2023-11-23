@@ -140,14 +140,14 @@ public class Piece implements Runnable {
 
 
     public  void bas (){
-        int nY=y-1;
+        int nY=y+1;
 
         if(!grille.verifColision(this,x,nY)&& grille.validationPosition(x,nY)){
             y=nY;
             System.out.println("nouvelle position piece : x = " + x + ", y = " + nY);
         }
         else {
-            System.out.println("impossible de se deplacer a gauche");
+            System.out.println("impossible de se deplacer en gauche");
         }
 
 

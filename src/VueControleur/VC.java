@@ -87,7 +87,7 @@ public class VC extends JFrame implements Observer {
                                                   System.out.println(e.getKeyCode());
                                                   switch (e.getKeyCode()) {
                                                       case KeyEvent.VK_SPACE:
-                                                          modele.droite();
+                                                          modele.getPieceCourante().rotation();
                                                           System.out.println("touche SPACE enfoncée ");
                                                           break;
                                                       case KeyEvent.VK_RIGHT:
@@ -97,6 +97,10 @@ public class VC extends JFrame implements Observer {
                                                       case KeyEvent.VK_LEFT:
                                                           modele.gauche();
                                                           System.out.println("touche GAUCHE enfoncée ");
+                                                          break;
+                                                      case KeyEvent.VK_DOWN:
+                                                          modele.bas();
+                                                          System.out.println("touche BAS enfoncée ");
                                                           break;
                                                   }
 

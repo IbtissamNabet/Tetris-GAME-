@@ -34,6 +34,7 @@ public class GrilleSimple extends Observable implements Runnable {
     }
     public Piece genererPieceAleatoire() {
         return new Piece(this, Piece.Formes.values()[(int) (Math.random() * Piece.Formes.values().length)]);
+        //return new Piece(this, Piece.Formes.O);
     }
 
     public void placerPiece(Piece piece) {
@@ -73,6 +74,7 @@ public class GrilleSimple extends Observable implements Runnable {
         if(pieceCourante.blocked){
             System.out.println("placer piece");
             placerPiece(pieceCourante);
+            verifGrille();
             pieceCourante=genererPieceAleatoire();
         }
         pieceCourante.run();
@@ -115,7 +117,6 @@ public class GrilleSimple extends Observable implements Runnable {
                 }
             }
         return false; //pas de colision
-
     }
     public void gauche(){
         pieceCourante.gauche();
@@ -131,4 +132,38 @@ public class GrilleSimple extends Observable implements Runnable {
 
 
     }
+
+    public boolean ligneComplete(int i){
+        boolean complete=true;
+        for (int j=0;j<grille[i].length;j++){
+            if (grille[j][i]==0){
+                complete=false;
+                break;
+            }
+        }
+        return complete;
+    }
+
+    public void supprimeLigne(int L){
+        for (int i=L;i>=0;i--){
+            for(int j=0;j<grille[i].length;j++){
+                if(i==0){
+                    grille[j][i]=0;
+                }
+                else{
+                    grille[j][i]=grille[j][i-1];
+                }
+            }
+        }
+    }
+
+    public void verifGrille(){
+        for (int i=0;i<grille.length;i++){
+            if(ligneComplete(i)){
+                System.out.println("ligne "+i+" complete");
+                supprimeLigne(i);
+            }
+        }
+    }
+
 }
