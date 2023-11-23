@@ -13,27 +13,11 @@ public class Piece implements Runnable {
 
 
     private Formes forme;
-    private int codeCouleur = 1;
     private int rotation; // Indique l'orientation actuelle de la pièce
 
     private int dY = -1;
-    private Formes formes;
 
-    public enum Formes {
-        I(new int[][]{{1}, {1}, {1}, {1}}),
-        L(new int[][]{{0, 0, 1}, {1, 1, 1}}),
-        J(new int[][]{{1, 0, 0}, {1, 1, 1}}),
-        O(new int[][]{{1, 1}, {1, 1}}),
-        S(new int[][]{{0, 1, 1}, {1, 1, 0}}),
-        T(new int[][]{{0, 1, 0}, {1, 1, 1}}),
-        Z(new int[][]{{1, 1, 0}, {0, 1, 1}});
-        public int[][] type;
 
-        //constructeur de l'enum
-        Formes(int[][] type_) {
-            this.type = type_;
-        }
-    }
 
     //le constructeur de piece qui prend en paramettre la grille a modifier
     //en plaçant la piece est la forme de piece qu'on veut placer
@@ -42,6 +26,7 @@ public class Piece implements Runnable {
         this.forme = forme_;
 
     }
+
 
     public void action() {
 
@@ -63,11 +48,8 @@ public class Piece implements Runnable {
         }
     }
 
-
-
-
-    public int getCodeCouleur() {
-        return codeCouleur;
+    public Formes getForme(){
+            return forme;
     }
 
     public int getx() {
@@ -152,6 +134,7 @@ public class Piece implements Runnable {
 
 
     }
+
 
 }
 

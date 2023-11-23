@@ -33,7 +33,7 @@ public class GrilleSimple extends Observable implements Runnable {
 
     }
     public Piece genererPieceAleatoire() {
-        return new Piece(this, Piece.Formes.values()[(int) (Math.random() * Piece.Formes.values().length)]);
+        return new Piece(this, Formes.values()[(int) (Math.random() * Formes.values().length)]);
         //return new Piece(this, Piece.Formes.O);
     }
 
@@ -45,7 +45,7 @@ public class GrilleSimple extends Observable implements Runnable {
         for (int i = 0; i < type.length; i++) {
             for (int j = 0; j < type[i].length; j++) {
                 if (type[i][j] == 1) {
-                    placerCase(pieceX + j, pieceY + i, piece.getCodeCouleur());
+                    placerCase(pieceX + j, pieceY + i, piece.getForme().getCodeCouleur());
                 }
             }
         }
@@ -131,6 +131,9 @@ public class GrilleSimple extends Observable implements Runnable {
         pieceCourante.bas();
 
 
+    }
+    public  void rotation(){
+        pieceCourante.rotation();
     }
 
     public boolean ligneComplete(int y){

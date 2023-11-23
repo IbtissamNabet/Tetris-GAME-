@@ -88,19 +88,23 @@ public class VC extends JFrame implements Observer {
                                                   switch (e.getKeyCode()) {
                                                       case KeyEvent.VK_SPACE:
                                                           modele.getPieceCourante().rotation();
-                                                          System.out.println("touche SPACE enfoncée ");
+                                                          System.out.println("touche SPACE enfoncée pour le deplacement a gauche  ");
                                                           break;
                                                       case KeyEvent.VK_RIGHT:
                                                           modele.droite();
-                                                          System.out.println("touche DROITE enfoncée ");
+                                                          System.out.println("touche DROITE enfoncée pour le deplacement a droite ");
                                                           break;
                                                       case KeyEvent.VK_LEFT:
                                                           modele.gauche();
-                                                          System.out.println("touche GAUCHE enfoncée ");
+                                                          System.out.println("touche GAUCHE enfoncée pour le deplacement en haut ");
                                                           break;
                                                       case KeyEvent.VK_DOWN:
                                                           modele.bas();
-                                                          System.out.println("touche BAS enfoncée ");
+                                                          System.out.println("touche BAS enfoncée pour le deplacement en bas  ");
+                                                          break;
+                                                      case KeyEvent.VK_UP:
+                                                          modele.rotation();
+                                                          System.out.println("touche HAUT enfoncée pour la rotation ");
                                                           break;
                                                   }
 

@@ -9,7 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 class VueGrilleV2 extends JPanel implements Observer {
-//taille d'une cellule dans la grille
+    //taille d'une cellule dans la grille
     private final static int TAILLE = 16;
     private GrilleSimple modele;
     Canvas c;
@@ -18,9 +18,8 @@ class VueGrilleV2 extends JPanel implements Observer {
 
         modele = _modele;
         setLayout(new BorderLayout());
-        Dimension dim = new Dimension(TAILLE*modele.TAILLE,TAILLE*modele.TAILLE);
+        Dimension dim = new Dimension(TAILLE * modele.TAILLE, TAILLE * modele.TAILLE);
         //this.setPreferredSize(dim);
-
 
 
         //setBackground(Color.black);
@@ -52,6 +51,35 @@ class VueGrilleV2 extends JPanel implements Observer {
         c.setPreferredSize(dim);
         add(c, BorderLayout.CENTER);
     }
+
+    //les couleurs
+    Color codeCouleurEnCouleur(int code) {
+        switch (code) {
+            case 1:
+                return Color.GREEN;
+            case 2:
+                return Color.BLUE;
+
+            case 3:
+                return Color.pink;
+
+            case 4:
+                return Color.red;
+
+            case 5:
+                return Color.orange;
+
+            case 6:
+                return Color.yellow;
+
+            case 7:
+                return Color.cyan;
+
+            default:
+                return Color.BLACK;
+        }
+    }
+
 
 
 
@@ -92,8 +120,8 @@ class VueGrilleV2 extends JPanel implements Observer {
 
                 if (type[y][x] == 1) {
 
-                    g.setColor(Color.BLUE);
-
+                    int codeCouleur = modele.getPieceCourante().getForme().getCodeCouleur();
+                    g.setColor(codeCouleurEnCouleur(codeCouleur));
                     g.fillRect((_x + x) * TAILLE, (_y + y) * TAILLE, TAILLE, TAILLE);
 
                 }
@@ -108,7 +136,8 @@ class VueGrilleV2 extends JPanel implements Observer {
             for (int x = 0; x < modele.TAILLE; x++) {
                 //if (!(i == modele.getPieceCourante().getx() && j == modele.getPieceCourante().gety())) {
                 if (modele.getGrille()[y][x]!=0){
-                    g.setColor(Color.BLUE);
+                    int codeCouleur = modele.getGrille()[y][x];
+                    g.setColor(codeCouleurEnCouleur(codeCouleur));
                 }
                 else{
                     g.setColor(Color.WHITE);
