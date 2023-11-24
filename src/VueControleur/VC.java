@@ -11,7 +11,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class VC extends JFrame implements Observer {
-
     JTextField jt = new JTextField("");
     JTextField jscore = new JTextField("");
     JButton jb = new JButton("do");
@@ -26,13 +25,18 @@ public class VC extends JFrame implements Observer {
 
         setSize(350, 400);
         JPanel jp = new JPanel(new BorderLayout());
+        Color backgroundColor = Color.GRAY;  // Choisissez la couleur que vous souhaitez
+        Color buttonColor = Color.GREEN;
+        Color textColor = Color.RED;
 
+// Appliquez les couleurs à vos composants
+        jp.setBackground(backgroundColor);
+        jb.setBackground(buttonColor);
+        jt.setBackground(textColor);
 
-        jp.add(jt, BorderLayout.NORTH);
+        jp.add(jt, BorderLayout.WEST);
         jp.add(jb, BorderLayout.SOUTH);
-        jp.add(jscore, BorderLayout.EAST);
-
-
+        jp.add(jscore, BorderLayout.NORTH);
         //vueGrille = new VueGrilleV1(modele); // composants swing, saccades
         vueGrille = new VueGrilleV2(modele); // composant AWT dédié
 
@@ -105,7 +109,6 @@ public class VC extends JFrame implements Observer {
                 jt.setText("Elapsed time : " + (System.currentTimeMillis() - lastTime) + "ms - x = " + modele.getPieceCourante().getx() + " y = " + modele.getPieceCourante().gety());
                 lastTime = System.currentTimeMillis();
                 jscore.setText("Le score actuel est :"+(modele.getScore()));
-
             }
         });
 
