@@ -10,6 +10,9 @@ public class GrilleSimple extends Observable implements Runnable {
 
     //initialisation de la piéce
     private Piece pieceCourante;
+
+    private Piece pieceSuivante;
+
     int score;
 
 
@@ -18,6 +21,7 @@ public class GrilleSimple extends Observable implements Runnable {
         initialiser();
 
         pieceCourante = genererPieceAleatoire();
+        pieceSuivante = genererPieceAleatoire();
         System.out.println("Coordonnées initiales de la pièce : x = " + pieceCourante.getx() + ", y = " + pieceCourante.gety());
         new OrdonnanceurSimple(this).start(); // pour changer le temps de pause, garder la référence de l'ordonnanceur
 
@@ -84,7 +88,8 @@ public class GrilleSimple extends Observable implements Runnable {
             System.out.println("placer piece");
             placerPiece(pieceCourante);
             verifGrille();
-            pieceCourante = genererPieceAleatoire();
+            pieceCourante = pieceSuivante;
+            pieceSuivante = genererPieceAleatoire();
         }
         pieceCourante.run();
         setChanged();
@@ -97,6 +102,14 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public void setPieceCourante(Piece p) {
         this.pieceCourante = p;
+    }
+
+    public Piece getPieceSuivante() {
+        return pieceSuivante;
+    }
+
+    public void setPieceSuivante(Piece p) {
+        this.pieceSuivante = p;
     }
 
     public int[][] getGrille() {

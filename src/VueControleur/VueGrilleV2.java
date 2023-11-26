@@ -1,6 +1,7 @@
 package VueControleur;
 
 import Modele.GrilleSimple;
+import Modele.Piece;
 
 import javax.swing.*;
 import java.awt.*;
@@ -102,34 +103,30 @@ class VueGrilleV2 extends JPanel implements Observer {
 
         // Dessiner les rectangles de la pièce J
         afficheGrille(g);
-        dessinerFormePiece(g, modele.getPieceCourante().getType(), x, y);
+        dessinerFormePiece(g, modele.getPieceCourante(), x, y);
 
-
-        g.dispose();
+            g.dispose();
 
         bs.show();
 
     }
 
 //parcourt le tableau de la pièce, et pour chaque case (1 pour une partie de la pièce, 0 pour une partie vide), elle remplit le rectangle correspondant dans la grille avec la couleur appropriée
-    public void dessinerFormePiece(Graphics g, int[][] type, int _x, int _y) {
+    public void dessinerFormePiece(Graphics g, Piece p, int _x, int _y) {
+        for (int y = 0; y < p.getForme().type.length; y++) {
 
-        for (int y = 0; y < type.length; y++) {
+            for (int x = 0; x < p.getForme().type[y].length; x++) {
 
-            for (int x = 0; x < type[y].length; x++) {
+                if (p.getForme().type[y][x] == 1) {
 
-                if (type[y][x] == 1) {
-
-                    int codeCouleur = modele.getPieceCourante().getForme().getCodeCouleur();
+                    int codeCouleur = p.getForme().getCodeCouleur();
                     g.setColor(codeCouleurEnCouleur(codeCouleur));
                     g.fillRect((_x + x) * TAILLE, (_y + y) * TAILLE, TAILLE, TAILLE);
 
                 }
             }
-
-            }
-
         }
+    }
 
     public void afficheGrille(Graphics g){
         for (int y = 0; y < modele.TAILLE; y++) {
