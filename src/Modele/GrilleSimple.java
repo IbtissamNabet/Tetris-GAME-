@@ -39,7 +39,7 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public Piece genererPieceAleatoire() {
         return new Piece(this, Formes.values()[(int) (Math.random() * Formes.values().length)]);
-        //return new Piece(this, Piece.Formes.O);
+        //return new Piece(this, Formes.values()[0]);
     }
 
     public void placerPiece(Piece piece) {

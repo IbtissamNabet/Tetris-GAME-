@@ -13,7 +13,6 @@ import java.util.concurrent.Executors;
 public class VC extends JFrame implements Observer {
     //JTextField jt = new JTextField("");
     JTextArea jt = new JTextArea("");
-    JTextField jscore = new JTextField("");
     JButton jb = new JButton("do");
 
     VuePieceSuivante vuePieceSuivante;
@@ -26,18 +25,18 @@ public class VC extends JFrame implements Observer {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         modele = _modele;
 
-        setSize(450, 400);
+        setSize(400, 450);
         JPanel jp = new JPanel(new BorderLayout());
         Color backgroundColor = Color.GRAY;  // Choisissez la couleur que vous souhaitez
-        Color buttonColor = Color.GREEN;
-        Color textColor = Color.RED;
+        Color buttonColor = Color.WHITE;
+        Color textColor = Color.WHITE;
         Color font = Color.BLACK;
 
         // Appliquez les couleurs à vos composants
         jp.setBackground(backgroundColor);
         jb.setBackground(buttonColor);
         jt.setBackground(textColor);
-        jscore.setBackground(textColor);
+
 
         // Configurer le JTextArea avec enroulement automatique
         jt.setLineWrap(true);
@@ -46,12 +45,12 @@ public class VC extends JFrame implements Observer {
         jt.setAlignmentX(Component.CENTER_ALIGNMENT);
         jt.setAlignmentY(Component.CENTER_ALIGNMENT);
         // Configurer la taille préférée du JTextArea
-        jt.setPreferredSize(new Dimension(100, 400));
+        jt.setPreferredSize(new Dimension(400, 50));
         jt.setForeground(font);
 
-        jp.add(jt, BorderLayout.WEST);
+        jp.add(jt, BorderLayout.NORTH);
         jp.add(jb, BorderLayout.SOUTH);
-        jp.add(jscore, BorderLayout.NORTH);
+
         //vueGrille = new VueGrilleV1(modele); // composants swing, saccades
         vueGrille = new VueGrilleV2(modele); // composant AWT dédié
 
@@ -125,9 +124,8 @@ public class VC extends JFrame implements Observer {
             public void run() {
                 vueGrille.update(o, arg);
                 vuePieceSuivante.repaint();
-                jt.setText("Elapsed time : " + (System.currentTimeMillis() - lastTime) + "ms - x=" + modele.getPieceCourante().getx() + " y=" + modele.getPieceCourante().gety());
+                jt.setText("Elapsed time : " + (System.currentTimeMillis() - lastTime) + "ms - x=" + modele.getPieceCourante().getx() + " y=" + modele.getPieceCourante().gety() + "\n"+ "Le score actuel est :"+(modele.getScore()));
                 lastTime = System.currentTimeMillis();
-                jscore.setText("Le score actuel est :"+(modele.getScore()));
             }
         });
 
