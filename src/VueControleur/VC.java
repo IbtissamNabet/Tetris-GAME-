@@ -17,6 +17,7 @@ public class VC extends JFrame implements Observer {
 
     VuePieceSuivante vuePieceSuivante;
     GrilleSimple modele;
+    VueFinPartie vueFin;
 
     Observer vueGrille;
     private Executor ex =  Executors.newSingleThreadExecutor();

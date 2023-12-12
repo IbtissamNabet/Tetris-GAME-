@@ -122,6 +122,9 @@ class VueGrilleV2 extends JPanel implements Observer {
                     int codeCouleur = p.getForme().getCodeCouleur();
                     g.setColor(codeCouleurEnCouleur(codeCouleur));
                     g.fillRect((_x + x) * TAILLE, (_y + y) * TAILLE, TAILLE, TAILLE);
+                    // Dessiner le contour noir
+                    g.setColor(Color.BLACK);
+                    g.drawRect((_x + x) * TAILLE, (_y+y) * TAILLE, TAILLE, TAILLE);
 
                 }
             }
@@ -142,7 +145,7 @@ class VueGrilleV2 extends JPanel implements Observer {
                 //dessiner un rectangle rempli sur une zone graphique spécifiée.
                 //int x, int y, int width, int height
                 g.fillRect(x * TAILLE, y * TAILLE, TAILLE, TAILLE);
-                g.setColor(Color.BLACK);
+                g.setColor(Color.darkGray);
                 g.drawRoundRect(x * TAILLE, y * TAILLE, TAILLE, TAILLE, 1, 1);
 
             }

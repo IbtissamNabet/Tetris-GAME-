@@ -34,7 +34,6 @@ public class GrilleSimple extends Observable implements Runnable {
                 grille[i][j] = 0;
             }
         }
-
     }
 
     public Piece genererPieceAleatoire() {
@@ -84,6 +83,9 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     public void run() {
+        if (partie_terminee()){
+            nouvellePartie();
+        }
         if (pieceCourante.blocked) {
             System.out.println("placer piece");
             placerPiece(pieceCourante);
@@ -222,6 +224,17 @@ public class GrilleSimple extends Observable implements Runnable {
 
         }
 
+    }
+    public void nouvellePartie(){
+        initialiser();
+        setScore(0);
+        setPieceCourante(genererPieceAleatoire());
+        setPieceSuivante(genererPieceAleatoire());
+        setChanged();
+        notifyObservers();
+    }
+    public boolean partie_terminee(){
+        return verifColision(pieceCourante, pieceCourante.getx(), pieceCourante.gety());
     }
 }
 

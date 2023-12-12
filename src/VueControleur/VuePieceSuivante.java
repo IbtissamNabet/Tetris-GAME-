@@ -33,6 +33,9 @@ public class VuePieceSuivante extends JPanel {
                     int codeCouleur = p.getForme().getCodeCouleur();
                     g.setColor(codeCouleurEnCouleur(codeCouleur));
                     g.fillRect(x*TAILLE, y*TAILLE, TAILLE, TAILLE);
+                    // Dessiner le contour noir
+                    g.setColor(Color.BLACK);
+                    g.drawRect(x * TAILLE, y * TAILLE, TAILLE, TAILLE);
                 }
             }
         }
@@ -67,3 +70,4 @@ public class VuePieceSuivante extends JPanel {
 
 
 }
+
