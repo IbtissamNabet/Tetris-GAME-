@@ -29,7 +29,7 @@ Lien git du projet : https://forge.univ-lyon1.fr/p2208660/JeuTetris/
 
 ** Appuyez sur les flèches gauche et droite pour déplacer la pièce
 
-** Appuyez sur la flèche du bas pour effectuer une rotation
+** Appuyez sur la flèche du haut pour effectuer une rotation
 
 ** Appuyez sur la flèche du bas pour accélérer la descente de la pièce  
 
@@ -53,8 +53,7 @@ L’organisation des fichiers du Jeu Tetris est la suivante.
 
 ** Modélisation des détections de collisions
 
-** Rotation et déplacement  
- latérale de la pièce
+** Rotation et déplacement latérale de la pièce
 
 ** Suppression des lignes complètes
 
@@ -66,6 +65,6 @@ L’organisation des fichiers du Jeu Tetris est la suivante.
 
 ## Contributeurs
 
-IBTISSAM NABET P2208660  
+NABET IBTISSAM P2208660  
 HANITRINIRINA SAROBIDY p2102840
  

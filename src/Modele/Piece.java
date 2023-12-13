@@ -3,6 +3,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+/**
+ * La classe Piece modélise une pièce du jeu Tetris.
+ * Contient des informations sur la position, la forme, sa configuration suivant sa rotation et sa forme.
+ * Possède une référence à la grille à laquelle elle appartient.
+ * Implémente l'interface Runnable pour le déplacement automatique.
+ */
 public class Piece implements Runnable {
 
     GrilleSimple grille;
@@ -14,8 +21,11 @@ public class Piece implements Runnable {
     private int dY = -1;
 
 
-    //le constructeur de piece qui prend en paramettre la grille a modifier
-    //en plaçant la piece et la forme de piece qu'on veut placer
+    /**
+     * Constructeur de la classe Piece.
+     * @param _grille La grille à laquelle la pièce appartient.
+     * @param forme_ La forme de la pièce qui est une des constantes de l'enum.
+     */
     public Piece(GrilleSimple _grille, Formes forme_) {
         grille = _grille;
         this.forme = forme_;
@@ -26,8 +36,10 @@ public class Piece implements Runnable {
             }
         }
     }
-    public void action() {}
 
+    /**
+     * Méthode principale liée au déplacement automatique de la pièce vers le bas.
+     */
     @Override
     public void run() {
         int nextY = y;
@@ -42,6 +54,7 @@ public class Piece implements Runnable {
         }
     }
 
+    //getters et setters
     public Formes getForme(){
             return forme;
     }
@@ -66,10 +79,18 @@ public class Piece implements Runnable {
         return forme.type;
     }
 
+    /**
+     * Obtient la configuration actuelle de la pièce.
+     * @return this.rotation qui est la configuration actuelle de la pièce.
+     */
     public int[][] getRotation(){
         return this.rotation;
     }
 
+    /**
+     * Déplace la pièce vers la gauche.
+     * Décale sa position x à x-1
+     */
     public void gauche() {
         int nX = x - 1;
         if (!grille.verifColision(this, nX, y)) {
@@ -81,6 +102,10 @@ public class Piece implements Runnable {
         }
     }
 
+    /**
+     * Déplace la pièce vers la droite.
+     * Décale sa position x à x+1
+     */
     public void droite() {
         int nX = x + 1;
         if (!grille.verifColision(this, nX, y) ) {
@@ -93,6 +118,10 @@ public class Piece implements Runnable {
         }
     }
 
+    /**
+     * Modifie l'attribut rotation
+     * La configuration obtenue correspond à l'ancienne après rotation dans le sens horaire
+     */    
     public void modifRotation() {
         int[][] CurrentRotation = this.rotation;//type actuel
         int[][] newRotation = new int[CurrentRotation[0].length][CurrentRotation.length]; //type apres rotation
@@ -115,7 +144,10 @@ public class Piece implements Runnable {
         }
     }
 
-
+    /**
+     * Déplace la pièce vers le bas.
+     * Décale sa position y à y+1
+     */
     public  void bas (){
         int nY=y+1;
 

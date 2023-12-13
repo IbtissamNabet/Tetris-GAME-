@@ -10,16 +10,27 @@ import java.util.Observer;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+/**
+ * La classe VC (VueControleur) représente la vue et le contrôleur du jeu Tetris.
+ * Elle étend la classe JFrame et implémente l'interface Observer pour observer les changements dans le modèle.
+ * Contient une référence à GrilleSimple
+ * Contient également les différents composants graphiques du jeu
+ * Ordonne ces composants dans la fenetre
+ * gère les interactions avec l'utilisateur
+ */
 public class VC extends JFrame implements Observer {
-    //JTextField jt = new JTextField("");
+
     JTextArea jt = new JTextArea("");
     JButton jb = new JButton("do");
-
     VuePieceSuivante vuePieceSuivante;
     GrilleSimple modele;
     Observer vueGrille;
     private Executor ex =  Executors.newSingleThreadExecutor();
 
+    /**
+     * Constructeur de la classe VC.
+     * @param _modele Le modèle de la grille.
+     */
     public VC(GrilleSimple _modele) {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         modele = _modele;
@@ -106,7 +117,9 @@ public class VC extends JFrame implements Observer {
 
     static long lastTime = System.currentTimeMillis();
 
-    // rafraichissement de la vue
+    /**
+     * Méthode de rafraichissement de la vue lorsqu'il y a des mises à jour dans le modèle (l'observable)
+     */
     @Override
     public void update(Observable o, Object arg) {
 
@@ -122,6 +135,10 @@ public class VC extends JFrame implements Observer {
 
     }
 
+    /**
+     * Méthode principale pour lancer l'application Tetris.
+     * @param args Les arguments de la ligne de commande.
+     */
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(new Runnable() {

@@ -9,12 +9,21 @@ import java.awt.image.BufferStrategy;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * La classe VueGrilleV2 représente la vue de la grille du jeu Tetris.
+ * Elle étend la classe JPanel 
+ * Elle implémente l'interface Observer pour observer les changements au niveau de GrilleSimple.
+ */
 class VueGrilleV2 extends JPanel implements Observer {
     //taille d'une cellule dans la grille
     private final static int TAILLE = 16;
     private GrilleSimple modele;
     Canvas c;
 
+    /**
+     * Constructeur de la classe VueGrilleV2.
+     * @param _modele La grille du jeu.
+     */
     public VueGrilleV2(GrilleSimple _modele) {
 
         modele = _modele;
@@ -43,7 +52,11 @@ class VueGrilleV2 extends JPanel implements Observer {
         add(c, BorderLayout.CENTER);
     }
 
-    //les couleurs
+    /**
+     * Méthode pour convertir un code couleur en une couleur spécifique.
+     * @param code Le code couleur.
+     * @return La couleur correspondante.
+     */
     Color codeCouleurEnCouleur(int code) {
         switch (code) {
             case 1:
@@ -71,7 +84,9 @@ class VueGrilleV2 extends JPanel implements Observer {
         }
     }
 
-
+    /**
+     * Méthode de rafraichissement de la vue lorsqu'il y a des mises à jour dans la grille
+     */
     @Override
     public void update(Observable o, Object arg) {
 
@@ -93,7 +108,13 @@ class VueGrilleV2 extends JPanel implements Observer {
         bs.show();
     }
 
-    //parcourt le tableau de la pièce, et pour chaque case (1 pour une partie de la pièce, 0 pour une partie vide), elle remplit le rectangle correspondant dans la grille avec la couleur appropriée
+    /**
+     * Méthode pour dessiner la forme d'une pièce sur la grille.
+     * @param g L'objet Graphics.
+     * @param p La pièce à dessiner.
+     * @param _x La position en x.
+     * @param _y La position en y.
+     */
     public void dessinerFormePiece(Graphics g, Piece p, int _x, int _y) {
         for (int y = 0; y < p.getRotation().length; y++) {
             for (int x = 0; x < p.getRotation()[y].length; x++) {
@@ -109,6 +130,10 @@ class VueGrilleV2 extends JPanel implements Observer {
         }
     }
 
+    /**
+     * Méthode pour afficher la grille.
+     * @param g L'objet Graphics.
+     */
     public void afficheGrille(Graphics g){
         for (int y = 0; y < modele.TAILLE; y++) {
             for (int x = 0; x < modele.TAILLE; x++) {
