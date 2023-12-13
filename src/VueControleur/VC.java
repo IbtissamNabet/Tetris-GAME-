@@ -17,7 +17,7 @@ public class VC extends JFrame implements Observer {
 
     VuePieceSuivante vuePieceSuivante;
     GrilleSimple modele;
-    VueFinPartie vueFin;
+    //VueFinPartie vueFin;
 
     Observer vueGrille;
     private Executor ex =  Executors.newSingleThreadExecutor();
@@ -87,7 +87,7 @@ public class VC extends JFrame implements Observer {
                                                   System.out.println(e.getKeyCode());
                                                   switch (e.getKeyCode()) {
                                                       case KeyEvent.VK_SPACE:
-                                                          modele.getPieceCourante().rotation();
+                                                          modele.getPieceCourante().modifRotation();
                                                           System.out.println("touche SPACE enfoncée pour le deplacement a gauche  ");
                                                           break;
                                                       case KeyEvent.VK_RIGHT:

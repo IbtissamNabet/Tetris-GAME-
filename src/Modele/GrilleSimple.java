@@ -36,13 +36,42 @@ public class GrilleSimple extends Observable implements Runnable {
         }
     }
 
+    public Piece getPieceCourante() {
+        return pieceCourante;
+    }
+
+    public void setPieceCourante(Piece p) {
+        this.pieceCourante = p;
+    }
+
+    public Piece getPieceSuivante() {
+        return pieceSuivante;
+    }
+
+    public void setPieceSuivante(Piece p) {
+        this.pieceSuivante = p;
+    }
+
+    public int[][] getGrille() {
+        return this.grille;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int s) {
+        score = s;
+    }
+
+
     public Piece genererPieceAleatoire() {
         return new Piece(this, Formes.values()[(int) (Math.random() * Formes.values().length)]);
         //return new Piece(this, Formes.values()[0]);
     }
 
     public void placerPiece(Piece piece) {
-        int[][] type = piece.getType();
+        int[][] type = piece.getRotation();
         int pieceX = piece.getx();
         int pieceY = piece.gety();
 
@@ -54,28 +83,17 @@ public class GrilleSimple extends Observable implements Runnable {
             }
         }
         pieceCourante.setx(pieceX);
-        pieceCourante.gety(pieceY);
+        pieceCourante.sety(pieceY);
         System.out.println("Coordonnées après placement de la pièce : x = " + pieceCourante.getx() + ", y = " + pieceCourante.gety());
     }
 
     public void placerCase(int x, int y, int codeCouleur) {
-        //  if (validationPosition(x, y)) {
         grille[y][x] = codeCouleur;
     }
-    //}
+
 
     public void action() {
         pieceCourante.action();
-
-
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int s) {
-        score = s;
     }
 
     public boolean validationPosition(int _nextX, int _nextY) {
@@ -98,25 +116,6 @@ public class GrilleSimple extends Observable implements Runnable {
         notifyObservers();
     }
 
-    public Piece getPieceCourante() {
-        return pieceCourante;
-    }
-
-    public void setPieceCourante(Piece p) {
-        this.pieceCourante = p;
-    }
-
-    public Piece getPieceSuivante() {
-        return pieceSuivante;
-    }
-
-    public void setPieceSuivante(Piece p) {
-        this.pieceSuivante = p;
-    }
-
-    public int[][] getGrille() {
-        return this.grille;
-    }
     //verifier la colision dans la grille
     //verifier la collision avec la grille inferieure
 
@@ -124,7 +123,7 @@ public class GrilleSimple extends Observable implements Runnable {
     public boolean verifColision(Piece p, int px, int py) {
         //px et py  les coordonnées de la pièce par rapport à la grille.
         //on recupere le tableau qui represente le type de la piece actuelle
-        int[][] type = p.getType();
+        int[][] type = p.getRotation();
         for (int y = 0; y < type.length; y++) {
             for (int x = 0; x < type[y].length; x++) {
                 //on parcourt le tableau de la piece
@@ -162,7 +161,7 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     public void rotation() {
-        pieceCourante.rotation();
+        pieceCourante.modifRotation();
     }
 
     public boolean ligneComplete(int y) {

@@ -13,7 +13,7 @@ public class Piece implements Runnable {
 
 
     private Formes forme;
-    private int rotation; // Indique l'orientation actuelle de la pièce
+    private int[][] rotation; // Indique l'orientation actuelle de la pièce
 
     private int dY = -1;
 
@@ -24,7 +24,12 @@ public class Piece implements Runnable {
     public Piece(GrilleSimple _grille, Formes forme_) {
         grille = _grille;
         this.forme = forme_;
-
+        this.rotation=new int[forme_.type.length][forme_.type[0].length];
+        for (int i=0; i<forme_.type.length; i++){
+            for (int j=0; j<forme_.type[0].length; j++){
+                rotation[i][j]=forme_.type[i][j];
+            }
+        }
     }
 
 
@@ -64,7 +69,7 @@ public class Piece implements Runnable {
         x = x_;
     }
 
-    public void gety(int y_) {
+    public void sety(int y_) {
         y = y_;
     }
 
@@ -72,20 +77,19 @@ public class Piece implements Runnable {
         return forme.type;
     }
 
+    public int[][] getRotation(){
+        return this.rotation;
+    }
+
     public void gauche() {
         int nX = x - 1;
-
         if (!grille.verifColision(this, nX, y) && grille.validationPosition(nX, y)) {
             x = nX;
-
             System.out.println("nouvelle position piece : x = " + nX + ", y = " + y);
-
             grille.notifyObservers();
         } else {
             System.out.println("impossible de se deplacer a gauche");
         }
-
-
     }
 
     public void droite() {
@@ -100,23 +104,21 @@ public class Piece implements Runnable {
         }
     }
 
-    public void rotation() {
-        int[][] typeActuel = this.forme.type;//type actuel
-        int[][] typeRotation = new int[typeActuel[0].length][typeActuel.length]; //type apres rotation
-// parcourt chaque élément du tableau typeActuel.
+    public void modifRotation() {
+        int[][] CurrentRotation = this.rotation;//type actuel
+        int[][] newRotation = new int[CurrentRotation[0].length][CurrentRotation.length]; //type apres rotation
+        // parcourt chaque élément du tableau typeActuel.
         // Effectuer la rotation de la pièce
-        for (int i = 0; i < typeActuel.length; i++) {
-            for (int j = 0; j < typeActuel[i].length; j++) {
-                if (!grille.verifColision(this, j, typeActuel.length - 1 - i) && grille.validationPosition(j, typeActuel.length - 1 - i)) {
+        for (int i = 0; i < CurrentRotation.length; i++) {
+            for (int j = 0; j < CurrentRotation[i].length; j++) {
+                if (!grille.verifColision(this, j, CurrentRotation.length - 1 - i) && grille.validationPosition(j, CurrentRotation.length - 1 - i)) {
                     //sens horaire
                     //la nouvelle position de l'indice de ligne après la rotation.
-                    typeRotation[j][typeActuel.length - 1 - i] = typeActuel[i][j];
+                    newRotation[j][CurrentRotation.length - 1 - i] = CurrentRotation[i][j];
                 }
             }
-
             // Mettre à jour le type de la pièce avec la rotation
-            this.forme.type = typeRotation;
-
+            this.rotation = newRotation;
         }
     }
 
@@ -131,10 +133,7 @@ public class Piece implements Runnable {
         else {
             System.out.println("impossible de se deplacer en gauche");
         }
-
-
     }
-
 
 }
 
