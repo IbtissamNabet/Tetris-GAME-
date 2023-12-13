@@ -17,8 +17,6 @@ public class VC extends JFrame implements Observer {
 
     VuePieceSuivante vuePieceSuivante;
     GrilleSimple modele;
-    //VueFinPartie vueFin;
-
     Observer vueGrille;
     private Executor ex =  Executors.newSingleThreadExecutor();
 
@@ -28,33 +26,24 @@ public class VC extends JFrame implements Observer {
 
         setSize(400, 450);
         JPanel jp = new JPanel(new BorderLayout());
-        Color backgroundColor = Color.GRAY;  // Choisissez la couleur que vous souhaitez
+        Color backgroundColor = Color.GRAY;
         Color buttonColor = Color.WHITE;
         Color textColor = Color.WHITE;
         Color font = Color.BLACK;
-
-        // Appliquez les couleurs à vos composants
         jp.setBackground(backgroundColor);
         jb.setBackground(buttonColor);
         jt.setBackground(textColor);
 
-
-        // Configurer le JTextArea avec enroulement automatique
         jt.setLineWrap(true);
-        jt.setWrapStyleWord(true); // Enrouler au mot
-        // Configurer la position du text dans le JTextArea
+        jt.setWrapStyleWord(true);
         jt.setAlignmentX(Component.CENTER_ALIGNMENT);
         jt.setAlignmentY(Component.CENTER_ALIGNMENT);
-        // Configurer la taille préférée du JTextArea
         jt.setPreferredSize(new Dimension(400, 50));
         jt.setForeground(font);
-
         jp.add(jt, BorderLayout.NORTH);
         jp.add(jb, BorderLayout.SOUTH);
 
-        //vueGrille = new VueGrilleV1(modele); // composants swing, saccades
-        vueGrille = new VueGrilleV2(modele); // composant AWT dédié
-
+        vueGrille = new VueGrilleV2(modele);
         jp.add((JPanel)vueGrille, BorderLayout.CENTER);
 
         vuePieceSuivante = new VuePieceSuivante(modele);
@@ -117,8 +106,9 @@ public class VC extends JFrame implements Observer {
 
     static long lastTime = System.currentTimeMillis();
 
+    // rafraichissement de la vue
     @Override
-    public void update(Observable o, Object arg) { // rafraichissement de la vue
+    public void update(Observable o, Object arg) {
 
         SwingUtilities.invokeLater(new Runnable() {
             //@Override
@@ -132,13 +122,9 @@ public class VC extends JFrame implements Observer {
 
     }
 
-
-
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(new Runnable() {
-
-
                 public void run() {
                     GrilleSimple m = new GrilleSimple();
                     VC vc = new VC(m);
@@ -150,11 +136,4 @@ public class VC extends JFrame implements Observer {
             }
         );
     }
-
-
-
-
-
-
-
 }

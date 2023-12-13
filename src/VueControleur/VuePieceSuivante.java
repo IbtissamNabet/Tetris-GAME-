@@ -21,8 +21,8 @@ public class VuePieceSuivante extends JPanel {
         super.paintComponent(g);
         // Dessiner la pièce suivante à droite de la grille
         Piece pieceSuivante = modele.getPieceSuivante();
-        int x = modele.TAILLE + 1; // Ajustez la position X selon vos besoins
-        int y = modele.TAILLE / 2; // Ajustez la position Y selon vos besoins
+        int x = modele.TAILLE + 1;
+        int y = modele.TAILLE / 2;
         dessinerFormePiece(g, modele.getPieceSuivante());
     }
 
@@ -67,7 +67,5 @@ public class VuePieceSuivante extends JPanel {
                 return Color.BLACK;
         }
     }
-
-
 }
 

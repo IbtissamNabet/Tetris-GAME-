@@ -6,21 +6,16 @@ import java.util.Random;
 public class Piece implements Runnable {
 
     GrilleSimple grille;
-
     public boolean blocked=false;
     private int x = 4 + (int) (Math.random() * ((16 - 4) + 1));
     private int y = -1;
-
-
     private Formes forme;
     private int[][] rotation; // Indique l'orientation actuelle de la pièce
-
     private int dY = -1;
 
 
-
     //le constructeur de piece qui prend en paramettre la grille a modifier
-    //en plaçant la piece est la forme de piece qu'on veut placer
+    //en plaçant la piece et la forme de piece qu'on veut placer
     public Piece(GrilleSimple _grille, Formes forme_) {
         grille = _grille;
         this.forme = forme_;
@@ -31,24 +26,18 @@ public class Piece implements Runnable {
             }
         }
     }
+    public void action() {}
 
-
-    public void action() {
-
-    }
-@Override
+    @Override
     public void run() {
         int nextY = y;
         int nextX = x;
         nextY -= dY;
-
         if (!grille.verifColision(this, nextX, nextY)) {
             y = nextY;
             x = nextX;
             System.out.println("pos" + x + " " + y);
         } else if( grille.verifColision(this,nextX,nextY)){
-            //Piece p =new Piece(grille,grille.genererPieceAleatoire().forme);
-            //grille.setPieceCourante(p);
             this.blocked=true;
         }
     }

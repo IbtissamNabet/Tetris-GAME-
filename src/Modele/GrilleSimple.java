@@ -7,26 +7,18 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public final int TAILLE = 20;
     private int[][] grille;
-
-    //initialisation de la piéce
     private Piece pieceCourante;
-
     private Piece pieceSuivante;
-
     int score;
-
 
     public GrilleSimple() {
         grille = new int[TAILLE][TAILLE];
         initialiser();
-
         pieceCourante = genererPieceAleatoire();
         pieceSuivante = genererPieceAleatoire();
         System.out.println("Coordonnées initiales de la pièce : x = " + pieceCourante.getx() + ", y = " + pieceCourante.gety());
         new OrdonnanceurSimple(this).start(); // pour changer le temps de pause, garder la référence de l'ordonnanceur
-
     }
-
 
     private void initialiser() {
         for (int i = 0; i < TAILLE; i++) {
@@ -64,11 +56,8 @@ public class GrilleSimple extends Observable implements Runnable {
         score = s;
     }
 
-
     public Piece genererPieceAleatoire() {
-        return new Piece(this, Formes.values()[(int) (Math.random() * Formes.values().length)]);
-        //return new Piece(this, Formes.values()[0]);
-    }
+        return new Piece(this, Formes.values()[(int) (Math.random() * Formes.values().length)]);}
 
     public void placerPiece(Piece piece) {
         int[][] type = piece.getRotation();
@@ -91,15 +80,6 @@ public class GrilleSimple extends Observable implements Runnable {
         grille[y][x] = codeCouleur;
     }
 
-
-    public void action() {
-        pieceCourante.action();
-    }
-
-    public boolean validationPosition(int _nextX, int _nextY) {
-        return (_nextX >= 0 && _nextX < TAILLE && _nextY >= 0 && _nextY < TAILLE);
-    }
-
     public void run() {
         if (partie_terminee()){
             nouvellePartie();
@@ -118,7 +98,6 @@ public class GrilleSimple extends Observable implements Runnable {
 
     //verifier la colision dans la grille
     //verifier la collision avec la grille inferieure
-
     //verifier si ya collision de la piece p dans la posotion px py dans la grille
     public boolean verifColision(Piece p, int px, int py) {
         //px et py  les coordonnées de la pièce par rapport à la grille.
@@ -132,7 +111,6 @@ public class GrilleSimple extends Observable implements Runnable {
                     //calcul de position dans la grille
                     int grilleX = x + px;
                     int grilleY = y + py;
-
                     // Vérification de la collision
                     if (grilleY >= TAILLE || grilleX < 0 || grilleX >= TAILLE || grilleY < 0 || grille[grilleY][grilleX] != 0) {
                         return true;
@@ -142,11 +120,9 @@ public class GrilleSimple extends Observable implements Runnable {
         }
         return false; //pas de colision
     }
-
     public boolean verifColision2(int[][] tab, int px, int py) {
         //px et py  les coordonnées de la pièce par rapport à la grille.
         //on recupere le tableau qui represente le type de la piece actuelle
-
         for (int y = 0; y < tab.length; y++) {
             for (int x = 0; x < tab[y].length; x++) {
                 //on parcourt le tableau de la piece
@@ -168,19 +144,14 @@ public class GrilleSimple extends Observable implements Runnable {
 
     public void gauche() {
         pieceCourante.gauche();
-
-
     }
 
     public void droite() {
         pieceCourante.droite();
-
     }
 
     public void bas() {
         pieceCourante.bas();
-
-
     }
 
     public void rotation() {
@@ -210,6 +181,7 @@ public class GrilleSimple extends Observable implements Runnable {
         }
     }
 
+    //verification de la grille si elle contient une ligne complet ou plusieur s -> supprime
     public void verifGrille() {
         int nbligneSupp = 0;
         for (int y = 0; y < grille.length; y++) {
@@ -247,6 +219,7 @@ public class GrilleSimple extends Observable implements Runnable {
         }
 
     }
+    //fonction pour reinstialiser le jeu
     public void nouvellePartie(){
         initialiser();
         setScore(0);
@@ -255,6 +228,7 @@ public class GrilleSimple extends Observable implements Runnable {
         setChanged();
         notifyObservers();
     }
+    //fonction qui retourne vrai si une partie est terminée
     public boolean partie_terminee(){
         return verifColision(pieceCourante, pieceCourante.getx(), pieceCourante.gety());
     }

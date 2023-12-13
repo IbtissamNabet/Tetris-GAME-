@@ -20,17 +20,10 @@ class VueGrilleV2 extends JPanel implements Observer {
         modele = _modele;
         setLayout(new BorderLayout());
         Dimension dim = new Dimension(TAILLE * modele.TAILLE, TAILLE * modele.TAILLE);
-        //this.setPreferredSize(dim);
-
-
-        //setBackground(Color.black);
 
         c = new Canvas() {
 
-
             public void paint(Graphics g) {
-
-
                 for (int y = 0; y < modele.TAILLE; y++) {
                     for (int x = 0; x < modele.TAILLE; x++) {
                         //if (!(i == modele.getPieceCourante().getx() && j == modele.getPieceCourante().gety())) {
@@ -42,10 +35,7 @@ class VueGrilleV2 extends JPanel implements Observer {
                         g.drawRoundRect(x * TAILLE, y * TAILLE, TAILLE, TAILLE, 1, 1);
 
                     }
-
                 }
-                //g.setColor(Color.RED);
-
             }
         };
 
@@ -82,25 +72,21 @@ class VueGrilleV2 extends JPanel implements Observer {
     }
 
 
-
-
     @Override
     public void update(Observable o, Object arg) {
 
-        BufferStrategy bs = c.getBufferStrategy(); // bs + dispose + show : double buffering pour éviter les scintillements
+        BufferStrategy bs = c.getBufferStrategy();
+
         if(bs == null) {
             c.createBufferStrategy(2);
             return;
         }
         Graphics g = bs.getDrawGraphics();
-        c.paint(g); // appel de la fonction pour dessiner
-        // Récupérer les coordonnées de la pièce J
-
+        // appel de la fonction pour dessiner
+        c.paint(g);
+        // Récupérer les coordonnées de la pièce
         int x = modele.getPieceCourante().getx();
         int y = modele.getPieceCourante().gety();
-
-
-        // Dessiner les rectangles de la pièce J
         afficheGrille(g);
         dessinerFormePiece(g, modele.getPieceCourante(), x, y);
         g.dispose();
@@ -126,7 +112,6 @@ class VueGrilleV2 extends JPanel implements Observer {
     public void afficheGrille(Graphics g){
         for (int y = 0; y < modele.TAILLE; y++) {
             for (int x = 0; x < modele.TAILLE; x++) {
-                //if (!(i == modele.getPieceCourante().getx() && j == modele.getPieceCourante().gety())) {
                 if (modele.getGrille()[y][x]!=0){
                     int codeCouleur = modele.getGrille()[y][x];
                     g.setColor(codeCouleurEnCouleur(codeCouleur));
@@ -142,5 +127,4 @@ class VueGrilleV2 extends JPanel implements Observer {
             }
         }
     }
-
 }
