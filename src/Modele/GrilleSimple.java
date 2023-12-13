@@ -143,6 +143,29 @@ public class GrilleSimple extends Observable implements Runnable {
         return false; //pas de colision
     }
 
+    public boolean verifColision2(int[][] tab, int px, int py) {
+        //px et py  les coordonnées de la pièce par rapport à la grille.
+        //on recupere le tableau qui represente le type de la piece actuelle
+
+        for (int y = 0; y < tab.length; y++) {
+            for (int x = 0; x < tab[y].length; x++) {
+                //on parcourt le tableau de la piece
+                //si ya pas d'autre piece (d'ou !=0) et si on est pas en bas de la gille
+                if (tab[y][x] == 1) {
+                    //calcul de position dans la grille
+                    int grilleX = x + px;
+                    int grilleY = y + py;
+
+                    // Vérification de la collision
+                    if (grilleY >= TAILLE || grilleX < 0 || grilleX >= TAILLE || grilleY < 0 || grille[grilleY][grilleX] != 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false; //pas de colision
+    }
+
     public void gauche() {
         pieceCourante.gauche();
 

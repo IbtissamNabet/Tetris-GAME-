@@ -42,11 +42,11 @@ public class Piece implements Runnable {
         int nextX = x;
         nextY -= dY;
 
-        if (grille.validationPosition(nextX, nextY) && !grille.verifColision(this, nextX, nextY)) {
+        if (!grille.verifColision(this, nextX, nextY)) {
             y = nextY;
             x = nextX;
             System.out.println("pos" + x + " " + y);
-        } else if(grille.validationPosition(nextX, nextY) && grille.verifColision(this,nextX,nextY)){
+        } else if( grille.verifColision(this,nextX,nextY)){
             //Piece p =new Piece(grille,grille.genererPieceAleatoire().forme);
             //grille.setPieceCourante(p);
             this.blocked=true;
@@ -83,7 +83,7 @@ public class Piece implements Runnable {
 
     public void gauche() {
         int nX = x - 1;
-        if (!grille.verifColision(this, nX, y) && grille.validationPosition(nX, y)) {
+        if (!grille.verifColision(this, nX, y)) {
             x = nX;
             System.out.println("nouvelle position piece : x = " + nX + ", y = " + y);
             grille.notifyObservers();
@@ -94,7 +94,7 @@ public class Piece implements Runnable {
 
     public void droite() {
         int nX = x + 1;
-        if (!grille.verifColision(this, nX, y) && grille.validationPosition(nX, y)) {
+        if (!grille.verifColision(this, nX, y) ) {
             x = nX;
             System.out.println("nouvelle position piece : x = " + nX + ", y = " + y);
 
@@ -109,16 +109,20 @@ public class Piece implements Runnable {
         int[][] newRotation = new int[CurrentRotation[0].length][CurrentRotation.length]; //type apres rotation
         // parcourt chaque élément du tableau typeActuel.
         // Effectuer la rotation de la pièce
-        for (int i = 0; i < CurrentRotation.length; i++) {
-            for (int j = 0; j < CurrentRotation[i].length; j++) {
-                if (!grille.verifColision(this, j, CurrentRotation.length - 1 - i) && grille.validationPosition(j, CurrentRotation.length - 1 - i)) {
-                    //sens horaire
-                    //la nouvelle position de l'indice de ligne après la rotation.
-                    newRotation[j][CurrentRotation.length - 1 - i] = CurrentRotation[i][j];
+        if(!grille.verifColision(this,x,y)){
+            for (int i = 0; i < CurrentRotation.length; i++) {
+                for (int j = 0; j < CurrentRotation[i].length; j++) {
+                    if (!grille.verifColision(this, j, CurrentRotation.length - 1 - i) ) {
+                        //sens horaire
+                        //la nouvelle position de l'indice de ligne après la rotation.
+                        newRotation[j][CurrentRotation.length - 1 - i] = CurrentRotation[i][j];
+                    }
                 }
             }
             // Mettre à jour le type de la pièce avec la rotation
-            this.rotation = newRotation;
+            if(!grille.verifColision2(newRotation,x,y)){
+                this.rotation = newRotation;
+            }
         }
     }
 
@@ -126,7 +130,7 @@ public class Piece implements Runnable {
     public  void bas (){
         int nY=y+1;
 
-        if(!grille.verifColision(this,x,nY)&& grille.validationPosition(x,nY)){
+        if(!grille.verifColision(this,x,nY)){
             y=nY;
             System.out.println("nouvelle position piece : x = " + x + ", y = " + nY);
         }
