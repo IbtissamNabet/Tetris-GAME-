@@ -44,8 +44,6 @@ public class VuePieceSuivante extends JPanel {
      * Méthode pour dessiner la forme d'une pièce.
      * @param g L'objet Graphics.
      * @param p La pièce à dessiner.
-     * @param _x La position en x.
-     * @param _y La position en y.
      */
     public void dessinerFormePiece(Graphics g, Piece p) {
         for (int y = 0; y < p.getForme().type.length; y++) {

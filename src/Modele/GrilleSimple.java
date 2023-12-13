@@ -111,7 +111,7 @@ public class GrilleSimple extends Observable implements Runnable {
     }
 
     /**
-     * Méthode principale faisant appel aux autres méthodes pour
+     * Méthode principale faisant appel aux autres méthodes
      * Gère le placement des pièces, la vérification de la grille et la génération de nouvelles pièces.
      */
     public void run() {
@@ -235,7 +235,7 @@ public class GrilleSimple extends Observable implements Runnable {
     /**
      * supprime une ligne donnée de la grille
      * décale les lignes en haut de la ligne supprimé à une case vers le bas
-     * @param y indice le la ligne à supprimer 
+     * @param L indice le la ligne à supprimer
      */
     public void supprimeLigne(int L) {
         for (int y = L; y >= 0; y--) {
